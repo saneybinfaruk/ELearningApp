@@ -1,6 +1,7 @@
 package com.awesomeproject
 
 import android.app.Application
+import androidx.multidex.MultiDexApplication
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost
@@ -12,7 +13,8 @@ import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.soloader.SoLoader
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
-class MainApplication : Application(), ReactApplication {
+
+class MainApplication : MultiDexApplication(), ReactApplication {
 
   override val reactNativeHost: ReactNativeHost =
       object : DefaultReactNativeHost(this) {
