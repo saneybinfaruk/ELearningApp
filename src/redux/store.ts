@@ -4,16 +4,18 @@ import FavoriteCourses from './FavoriteSlice';
 import EnrolledCourses from './CourseEnrollSlice';
 import {persistReducer, persistStore} from 'redux-persist';
 import {setupListeners} from '@reduxjs/toolkit/query';
+import AuthSlice from './AuthSlice';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['favoriteCourses', 'enrolledCourses'],
+  whitelist: ['favoriteCourses', 'enrolledCourses', 'auth'],
 };
 
 const reducers = combineReducers({
   favoriteCourses: FavoriteCourses,
   enrolledCourses: EnrolledCourses,
+  auth: AuthSlice,
 });
 
 const persistReducers = persistReducer(persistConfig, reducers);

@@ -35,6 +35,7 @@ import {GET_COURSE} from '../types/graphqlQueries';
 import Loader from '../components/Loader';
 import useFavorite from '../hook/useFavorite';
 import placeholderImage from '../../assets/photos/details_placeholder.png';
+import SkeletonDetails from '../components/Skeleton/SkeletonDetails';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Details'>;
 
@@ -55,11 +56,11 @@ const Details = ({navigation, route}: Props) => {
    */
   useBottomBarVisibility();
 
-  if (loading) return <Loader />;
+  if (loading) return <SkeletonDetails />;
 
   return (
     <>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView style={styles.container}>
         <Header course={data?.course!} />
 
         <View>

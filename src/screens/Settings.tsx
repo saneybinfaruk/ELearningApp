@@ -18,6 +18,9 @@ import RegularText from '../components/RegularText';
 import {Colors} from '../theme/MyColors';
 import MediumText from '../components/MediumText';
 import useBottomBarVisibility from '../hook/useBottomBarVisibility';
+import auth from '@react-native-firebase/auth';
+import {useDispatch} from 'react-redux';
+import {logout} from '../redux/AuthSlice';
 
 const Settings = () => {
   /**
@@ -26,34 +29,19 @@ const Settings = () => {
    * This hook is used to manage the visibility of the bottom navigation bar.
    * It ensures that the bottom navigation bar is hidden when this component is mounted.
    */
+
   useBottomBarVisibility();
+  const dispatch = useDispatch();
+  const handleSignOut = () => {
+    auth()
+      .signOut()
+      .then(() => {
+        dispatch(logout());
+      })
+      .catch(error => console.log(error));
+  };
   return (
     <ScrollView>
-      {/* <View style={styles.headerContainer}>
-        <View style={styles.titleContainer}>
-          <TouchableOpacity>
-            <Image source={backArrowIcon} />
-          </TouchableOpacity>
-          <RegularText style={styles.settingText}>Settings</RegularText>
-        </View>
-
-        <View style={styles.iconContainer}>
-          <TouchableOpacity>
-            <AntDesign name="setting" size={20} style={styles.icon} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Octicon
-              name="bell"
-              size={20}
-              style={[
-                styles.icon,
-                {paddingHorizontal: 6, backgroundColor: 'lightgray'},
-              ]}
-            />
-          </TouchableOpacity>
-        </View>
-      </View> */}
-
       <View style={styles.settingContainer}>
         <Image source={avatar} style={styles.avatar} />
         <View style={styles.menuContainer}>
@@ -121,7 +109,7 @@ const Settings = () => {
                 color={Colors.primaryDarkColor}
               />
             }
-            onPress={() => {}}
+            onPress={()=>{}}
           />
           <SettingMenu
             label="Log Out"
@@ -132,7 +120,7 @@ const Settings = () => {
                 color={Colors.primaryDarkColor}
               />
             }
-            onPress={() => {}}
+            onPress={handleSignOut}
           />
         </View>
       </View>
@@ -149,7 +137,7 @@ interface SettingMenuProps {
 }
 const SettingMenu = ({icon, label, onPress}: SettingMenuProps) => {
   return (
-    <TouchableOpacity style={styles.settingMenuContainer}>
+    <TouchableOpacity style={styles.settingMenuContainer} onPress={onPress}>
       <View style={styles.settingMenuLabelContainer}>
         {icon}
         <MediumText style={styles.settingMenuLabelText}>{label}</MediumText>

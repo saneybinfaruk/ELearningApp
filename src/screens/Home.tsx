@@ -23,6 +23,10 @@ import Loader from '../components/Loader';
 import {useSelector} from 'react-redux';
 import {RootState} from '../redux/store';
 import useRefresh from '../hook/useRefresh';
+import SkeletonHorizontal from '../components/Skeleton/SkeletonHorizontal';
+import Skeleton from '../components/Skeleton/Skeleton';
+import SkeletonHome from '../components/Skeleton/SkeletonHome';
+import auth from '@react-native-firebase/auth';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'HomeScreen'>;
 
@@ -34,7 +38,7 @@ const Home = ({navigation}: Props) => {
   };
   const {refreshing, onRefresh} = useRefresh(refetch);
 
-  if (loading) return <Loader />;
+  if (loading) return <SkeletonHome />;
   return (
     <ScrollView
       contentContainerStyle={styles.container}
@@ -63,6 +67,7 @@ interface HeadingProps {
   navigation: NativeStackNavigationProp<RootStackParamList, 'HomeScreen'>;
 }
 const Heading = ({datas, navigation}: HeadingProps) => {
+  const {user} = useSelector((state: RootState) => state.auth);
   return (
     <View>
       <View style={styles.welcomeContainer}>
@@ -70,7 +75,7 @@ const Heading = ({datas, navigation}: HeadingProps) => {
           Welcome{' '}
           <RegularText
             style={[styles.welcomeText, {color: Colors.primaryDarkColor}]}>
-            sf29
+            {user?.displayName}
           </RegularText>
         </RegularText>
 

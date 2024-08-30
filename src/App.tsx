@@ -49,23 +49,20 @@ import Inbox from './screens/Inbox';
 import Courses from './screens/Courses';
 import {ApolloProvider} from '@apollo/client';
 import apolloClient from './services/apollo-client';
-import {Provider} from 'react-redux';
-import {persistor, store} from './redux/store';
-import {PersistGate} from 'redux-persist/integration/react'; 
+import {Provider, useSelector} from 'react-redux';
+import {persistor, RootState, store} from './redux/store';
+import {PersistGate} from 'redux-persist/integration/react';
 import SplashScreen from 'react-native-splash-screen';
 
 function App(): React.JSX.Element {
   const Tab = createBottomTabNavigator<BottomTabParamList>();
   const Stack = createNativeStackNavigator<RootStackParamList>();
 
-  useEffect(() => {
-     
-  }, []);
-
   const LoginStack = () => (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="StartUp" component={StartUp} />
       <Stack.Screen name="SignIn" component={SignIn} />
+
+      <Stack.Screen name="StartUp" component={StartUp} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="ResetPassword" component={ResetPassword} />
     </Stack.Navigator>
@@ -143,6 +140,12 @@ function App(): React.JSX.Element {
   );
 
   const Tabs = () => {
+    const {user} = useSelector((state: RootState) => state.auth);
+
+    console.log('User ', user);
+
+    if (!user) return <LoginStack />;
+
     return (
       <Tab.Navigator
         screenOptions={() => ({
@@ -228,18 +231,24 @@ function App(): React.JSX.Element {
     );
   };
 
+  const AppStack = () => (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="MainTabs" component={Tabs} />
+
+      <Stack.Screen name="HomeScreen" component={HomeStack} />
+    </Stack.Navigator>
+  );
+
   const scheme = useColorScheme();
 
   const backgroundStyle = {
     backgroundColor: scheme === 'dark' ? Colors.darker : Colors.lighter,
   };
 
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
 
-  useEffect(()=> {
-    SplashScreen.hide()
-  },[])
-
-  
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
@@ -247,10 +256,7 @@ function App(): React.JSX.Element {
           <SafeAreaView style={styles.container}>
             <NavigationContainer
               theme={scheme === 'dark' ? DarkTheme : LightTheme}>
-              <Stack.Navigator screenOptions={{headerShown: false}}>
-                <Stack.Screen name="Login" component={LoginStack} />
-                <Stack.Screen name="MainTabs" component={Tabs} />
-              </Stack.Navigator>
+              <AppStack />
             </NavigationContainer>
           </SafeAreaView>
         </ApolloProvider>

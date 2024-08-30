@@ -13,6 +13,7 @@ import CardLayout from './CardLayout';
 import {Course, GetCoursesData} from '../types/interfaces';
 import {useQuery} from '@apollo/client';
 import {GET_COURSES_BY_TYPE} from '../types/graphqlQueries';
+import SkeletonHorizontal from './Skeleton/SkeletonHorizontal';
 
 interface Props {
   label: string;
@@ -25,7 +26,7 @@ const HorizontalListWithBtn = ({label, datas, onPress, itemPress}: Props) => {
     variables: {courseType: label},
   });
 
-  if (loading) return <ActivityIndicator />;
+  if (loading) return <SkeletonHorizontal />;
 
   return (
     <View>

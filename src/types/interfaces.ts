@@ -17,7 +17,7 @@ export type RootStackParamList = {
   Enroll: {id: number};
   MyCoursesStack: undefined;
   EnrolledCourses: undefined;
-
+  Demo: undefined;
 };
 
 export type BottomTabParamList = {
@@ -74,4 +74,10 @@ export interface GetCoursesTypes {
 
 export interface GetCourse {
   course: Course;
+}
+
+export interface User {
+  uid: string;
+  email: string;
+  displayName: string;
 }

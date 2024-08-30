@@ -17,13 +17,15 @@ import {itCourses, myskills} from '../constants/datas';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../types/interfaces';
 import EnrolledCourses from '../components/EnrolledCourses';
+import auth from '@react-native-firebase/auth';
+import {useSelector} from 'react-redux';
+import {RootState} from '../redux/store';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Profile'>;
 };
 const Profile = ({navigation}: Props) => {
-   
-
+  const {user} = useSelector((state: RootState) => state.auth);
   const handleCardPress = (id: number) => {
     navigation.navigate('Details', {id: id});
   };
@@ -41,7 +43,9 @@ const Profile = ({navigation}: Props) => {
           </TouchableOpacity>
 
           <View style={styles.nameContainer}>
-            <SemiBoldText style={styles.nameText}>Name Here</SemiBoldText>
+            <SemiBoldText style={styles.nameText}>
+              {user ? user?.displayName : 'Name Here'}
+            </SemiBoldText>
             <RegularText style={styles.occupationText}>Tag Line</RegularText>
           </View>
 

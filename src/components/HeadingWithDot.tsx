@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native';
 import React from 'react';
 import BoldText from './BoldText';
 import {Colors} from '../theme/MyColors';
