@@ -1,3 +1,18 @@
+# eLearner Android App
+
+Welcome to the eLearner Android App! This app is designed to provide an engaging and interactive learning experience for users. Whether you're a student looking to enhance your knowledge or a professional seeking to acquire new skills, eLearner has something for you.
+
+## Technologies Used
+
+- **React Native**: Framework for building the mobile app.
+- **Redux**: State management library for handling app state.
+- **Firebase**: Backend services for authentication and real-time data.
+- **Node.js**: Backend server for handling business logic and API endpoints.
+- **GraphQL**: Query language for API interactions.
+- **Skeleton Placeholder**: UI component to display loading states.
+
+
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
