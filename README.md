@@ -10,7 +10,7 @@ Welcome to the eLearner Android App! This app is designed to provide an engaging
 - **Node.js**: Backend server for handling business logic and API endpoints.
 - **GraphQL**: Query language for API interactions.
 - **Skeleton Placeholder**: UI component to display loading states.
-
+- **PostgreSQL**: Relational database for storing application data.
 
 
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
