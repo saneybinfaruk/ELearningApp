@@ -10,7 +10,7 @@ import {RootStackParamList} from '../types/interfaces';
 type Props = NativeStackScreenProps<RootStackParamList, 'StartUp'>;
 
 const StartUp = ({navigation}: Props) => {
-  const handleNavigation = (screenName: keyof RootStackParamList) => {
+  const handleNavigation = (screenName: "MainTabs" | 'SignIn' | 'SignUp') => {
     navigation.navigate(screenName);
   };
 
@@ -35,7 +35,7 @@ const StartUp = ({navigation}: Props) => {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity onPress={()=> handleNavigation('MainTabs')}>
+      <TouchableOpacity onPress={() => handleNavigation('MainTabs')}>
         <BoldText style={styles.continueText}>Continue as Guest</BoldText>
       </TouchableOpacity>
     </View>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
     marginHorizontal: 25,
-    fontFamily: 'Inter-Light'
+    fontFamily: 'Inter-Light',
   },
 
   btnContainer: {
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     fontFamily: 'Inter-Medium',
     textAlign: 'center',
-    fontSize: 24
+    fontSize: 24,
   },
 
   continueText: {

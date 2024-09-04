@@ -17,7 +17,7 @@ export type RootStackParamList = {
   Enroll: {id: number};
   MyCoursesStack: undefined;
   EnrolledCourses: undefined;
-  Demo: undefined;
+ 
 };
 
 export type BottomTabParamList = {

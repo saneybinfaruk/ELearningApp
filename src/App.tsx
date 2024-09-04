@@ -60,11 +60,11 @@ function App(): React.JSX.Element {
 
   const LoginStack = () => (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="SignIn" component={SignIn} />
-
       <Stack.Screen name="StartUp" component={StartUp} />
+      <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="ResetPassword" component={ResetPassword} />
+      <Stack.Screen name="MainTabs" component={Tabs} />
     </Stack.Navigator>
   );
 
@@ -140,12 +140,6 @@ function App(): React.JSX.Element {
   );
 
   const Tabs = () => {
-    const {user} = useSelector((state: RootState) => state.auth);
-
-    console.log('User ', user);
-
-    if (!user) return <LoginStack />;
-
     return (
       <Tab.Navigator
         screenOptions={() => ({
@@ -231,13 +225,19 @@ function App(): React.JSX.Element {
     );
   };
 
-  const AppStack = () => (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="MainTabs" component={Tabs} />
+  const AppStack = () => {
+    const {user} = useSelector((state: RootState) => state.auth);
 
-      <Stack.Screen name="HomeScreen" component={HomeStack} />
-    </Stack.Navigator>
-  );
+    return (
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        {user ? (
+          <Stack.Screen name="MainTabs" component={Tabs} />
+        ) : (
+          <Stack.Screen name="Login" component={LoginStack} />
+        )}
+      </Stack.Navigator>
+    );
+  };
 
   const scheme = useColorScheme();
 
